@@ -50,7 +50,7 @@ class ScoutMessenger {
 
     // cmd subscriber
     motion_cmd_sub_ = node_->create_subscription<geometry_msgs::msg::Twist>(
-        "/cmd_vel", 5,
+        "/cmd_vel_chassis", 5,
         std::bind(&ScoutMessenger::TwistCmdCallback, this,
                   std::placeholders::_1));
     light_cmd_sub_ = node_->create_subscription<scout_msgs::msg::ScoutLightCmd>(

@@ -5,6 +5,10 @@
 
     <xacro:arg name="robot_namespace" default="/" /> 
 
+      <!-- base_link to livox_frame -->
+    <xacro:arg name="xyz" default="0.0 0.045 0.49" />
+    <xacro:arg name="rpy" default="0 0 0" />
+
     <xacro:include filename="$(find scout_description)/urdf/scout_v2/scout_wheel_type1.xacro" />
     <xacro:include filename="$(find scout_description)/urdf/scout_v2/scout_wheel_type2.xacro" />
 
@@ -82,5 +86,42 @@
     <xacro:scout_wheel_type2 wheel_prefix="rear_right">
         <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="3.14 0 0" />
     </xacro:scout_wheel_type2>
+
+    <!-- Livox-Mid360  -->
+    <link name="livox_frame">
+        <visual>
+        <origin xyz="0.025 -0.0265 -0.025" rpy="${pi/2} 0 ${pi}"/>
+        <geometry>
+            <mesh filename="package://gazebo_simulation/meshes/mid360.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="blue">
+            <color rgba="0 0 1.0 1" />
+        </material>
+        </visual>
+    </link>
+
+    <joint name="livox_joint" type="fixed">
+        <origin xyz="$(arg xyz)" rpy="$(arg rpy)" />
+        <parent link="base_link"/>
+        <child link="livox_frame"/>
+    </joint>
+
+    <!-- camera_link2base_link -->
+    <link name="camera_link">
+        <visual>
+        <geometry>
+            <box size="0.05 0.05 0.05"/>
+        </geometry>
+        <material name="red">
+            <color rgba="1.0 0 0 1"/>
+        </material>
+        </visual>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+        <origin xyz="0.10 0.0 0.49" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="camera_link"/>
+    </joint>
 
 </robot>
