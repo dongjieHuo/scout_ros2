@@ -109,18 +109,18 @@
     <!-- camera_link2base_link -->
     <link name="camera_link">
         <visual>
-        <geometry>
-            <box size="0.05 0.05 0.05"/>
-        </geometry>
-        <material name="red">
-            <color rgba="1.0 0 0 1"/>
-        </material>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0 0 1"/>
+            </material>
         </visual>
     </link>
 
     <joint name="camera_joint" type="fixed">
-        <origin xyz="0.10 0.0 0.49" rpy="0 0 0"/>
-        <parent link="base_link"/>
+        <origin xyz="-0.143769 -0.0185035 0.14186" rpy="-1.6841 0.00532 -1.59"/>
+        <parent link="livox_frame"/>
         <child link="camera_link"/>
     </joint>
 
